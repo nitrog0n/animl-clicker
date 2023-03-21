@@ -1,0 +1,65 @@
+.app-container {
+    display: flex;
+    height: 100%;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .selected-animl-container {
+    position: relative;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    margin-top: 1rem;
+  }
+  
+  .selected-animl,
+  .animl {
+    background-size: cover;
+    border-radius: 50%;
+  }
+  .selected-animl {
+    height: 300px;
+    width: 300px;
+  
+    transition: width 0.5s, height 0.5s, transform 1s;
+  }
+  
+  .auto-clicker {
+    width: 30px;
+    position: absolute;
+    bottom: calc(0% - 15px);
+    left: calc(50% - 15px);
+  }
+  
+  .animl-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+  
+    margin: 2rem 0;
+    padding: 0;
+  
+    list-style: none;
+    text-align: center;
+  }
+  
+  @media (min-width: 400px) {
+    .animl-list {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  .animl {
+    margin-bottom: 0.5rem;
+  
+    height: 100px;
+    width: 100px;
+  }
+  

@@ -1,0 +1,73 @@
+<div class="app-container">
+  <div class="main-content">
+    <!-- Make sure we load animlz before we display anything -->
+    <ng-container *ngIf="(state.animlz | async) !== null; else loading">
+      <!-- Animl type selector -->
+      <select (change)="onAnimlChange($event)">
+        <option *ngFor="let animl of selectableAnimlz" [value]="animl">
+          {{ animl }}
+        </option>
+      </select>
+
+      <!-- Page title -->
+      <h1>{{ state.animlClicks }} ANIMLZ</h1>
+
+      <!-- Auto Clicker Button -->
+      <button
+        (click)="toggleAutoClicker(selectedAniml)"
+        *ngIf="state.autoClickers"
+      >
+        Turn Auto Clicker {{ state.isAutoClickerOn ? 'Off' : 'On' }}
+      </button>
+
+      <!-- Selected Animl -->
+      <div class="selected-animl-container">
+        <div
+          #selectedAniml
+          class="selected-animl"
+          (click)="onSelectedAnimlClick(selectedAniml)"
+          [ngStyle]="{
+            'background-image': 'url(' + state.selectedAniml?.src + ')'
+          }"
+        ></div>
+        <!-- Auto Clicker Cursor -->
+        <img
+          *ngFor="let item of [].constructor(state.autoClickers); let i = index"
+          class="auto-clicker"
+          src="https://www.kindpng.com/picc/m/433-4334241_transparent-cursor-clipart-teacher-minecraft-valentines-hd-png.png"
+        />
+      </div>
+
+      <!-- List of animlz to choose -->
+      <ul class="animl-list">
+        <li *ngFor="let animl of state.animlz.value">
+          <div
+            class="animl"
+            [ngStyle]="{
+              'background-image': 'url(' + animl.src + ')',
+              'cursor': animl.clicks > state.animlClicks ? 'not-allowed' : 'pointer'
+            }"
+            (click)="changeSelectedAniml(animl)"
+          ></div>
+          <span>{{ animl.clicks }}</span>
+        </li>
+      </ul>
+
+      <!-- reset button -->
+      <button (click)="reset()">DO NOT CLICK THIS EVER!!!!!!!!!!!</button>
+    </ng-container>
+  </div>
+
+  <div class="store">
+    <ul>
+      <li>
+        <button (click)="addAutoClicker()">
+          Buy Auto Clicker for 500 Clicks
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- show while API is loading  -->
+  <ng-template #loading>...loading</ng-template>
+</div>
